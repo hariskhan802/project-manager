@@ -87,5 +87,36 @@
             printColumns: [0, 1, 2, 3, 4],
             xlsColumns: [0, 1, 2, 3, 4]
         });
+
+        $(document).on('click', '.client-can-view-file',function () {
+            var data = {file_id: $(this).attr('data-id'), project_id: $(this).attr('project-id')};
+            data['can_view'] = 'yes'; 
+            if($(this).hasClass('active')) {
+                data['can_view'] = 'no'; 
+            }
+            $.ajax({
+                url: "<?php echo get_uri("projects/client_can_view_file") ?>",
+                type: "post",
+                data: data,
+                success: (result) => {
+                    var result = JSON.parse(result);
+                    if(result.client_can_view_file == 1) {
+                        $(this).addClass('active');
+                        appAlert.success('Update Successfully', {duration: 10000});
+                    }
+                    else if(result.client_can_view_file == 0) {
+                        $(this).removeClass('active');
+                        appAlert.success('Update Successfully', {duration: 10000});
+                    }
+                    else {
+                        appAlert.success(result.permission, {duration: 10000});
+                    }
+                },
+                error: function(){
+                    alert('Something Went Wrong!');
+                }
+            });
+            
+        });
     });
 </script>

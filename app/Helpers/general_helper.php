@@ -1792,9 +1792,9 @@ if (!function_exists('show_404')) {
     }
 
 }
-if (!function_exists('d')) {
+if (!function_exists('dd')) {
 
-    function d($data) {
+    function dd($data) {
         echo "<pre>";
         print_r($data);
         echo "</pre>";

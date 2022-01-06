@@ -56,11 +56,16 @@ class Project_files_model extends Crud_model {
         if ($project_id) {
             $where = " AND $project_files_table.project_id=$project_id";
         }
-
+        $users_model = model('App\Models\Users_model', false);
+        $cUser = $users_model->get_client_by_id($users_model->login_user_id());
+        if (get_array_value($cUser, 'user_type') == 'client') {
+            $where .= " AND $project_files_table.client_can_view='1'";
+        }
         $sql = "SELECT $project_files_table.*, CONCAT($users_table.first_name, ' ', $users_table.last_name) AS uploaded_by_user_name, $users_table.image AS uploaded_by_user_image, $users_table.user_type AS uploaded_by_user_type
         FROM $project_files_table
         LEFT JOIN $users_table ON $users_table.id= $project_files_table.uploaded_by
         WHERE $project_files_table.deleted=0 $where";
+        
         return $this->db->query($sql);
     }
 
@@ -73,5 +78,15 @@ class Project_files_model extends Crud_model {
             return $this->db->query($sql);
         }
     }
-
+    function give_client_can_view_file($file_id, $project_id, $can_view) {
+        $result = false;
+        $db = \Config\Database::connect();
+        $builder = $db->table($this->table);
+        $builder->set(['client_can_view'   => ($can_view == 'yes' ? 1 : 0) ]);
+        $builder->where(['id' => $file_id, 'project_id' => $project_id]);
+        if($builder->update())
+            $result = true;
+        return $result;
+    }
+    
 }

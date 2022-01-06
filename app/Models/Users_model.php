@@ -331,5 +331,17 @@ class Users_model extends Crud_model {
         return $this->db->query($sql)->getResultArray();
         // print_r($sql); die;
     }
+    public function  get_client_by_id($ids)
+    {
+        if (!$ids) return;
+
+
+        $sql = "SELECT users.id, CONCAT(first_name, ' ', last_name) as name, image, user_type, role_id 
+                FROM users WHERE users.deleted=0 AND users.user_type='client' && users.id IN ($ids)
+                ORDER BY users.id DESC";
+
+        return $this->db->query($sql)->getRowArray();
+        // print_r($sql); die;
+    }
        
 }

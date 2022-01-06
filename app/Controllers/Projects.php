@@ -4013,12 +4013,14 @@ class Projects extends Security_Controller {
         } else {
             $description .= "</div>";
         }
-
+        // print_r($data); die;
         $options = anchor(get_uri("projects/download_file/" . $data->id), "<i data-feather='download-cloud' class='icon-16'></i>", array("title" => app_lang("download")));
         if ($this->can_delete_files($data->uploaded_by)) {
             $options .= js_anchor("<i data-feather='x' class='icon-16'></i>", array('title' => app_lang('delete_file'), "class" => "delete", "data-id" => $data->id, "data-action-url" => get_uri("projects/delete_file"), "data-action" => "delete-confirmation"));
         }
-
+        if (!in_array($this->login_user->role_id, [6, 9, 10, 11, 12, 13]) &&  $this->login_user->user_type != 'client') {
+            $options .= js_anchor("<i data-feather='eye' class='icon-16'></i>", array('title' => 'Client Can View File', "class" => "client-can-view-file ".($data->client_can_view == 1 ? 'active' : ''), "data-id" => $data->id, "project-id" => $data->project_id, "data-action-url" => get_uri("projects/client_can_view_file")));
+        }
         //show checkmark to download multiple files
         $checkmark = js_anchor("<span class='checkbox-blank mr15 float-start'></span>", array('title' => "", "class" => "", "data-id" => $data->id, "data-act" => "download-multiple-file-checkbox")) . $data->id;
 
@@ -4954,7 +4956,18 @@ class Projects extends Security_Controller {
         $view_data['task_timesheet'] = $this->Timesheets_model->get_details($options)->getResult();
         return $this->template->view("projects/tasks/task_timesheet", $view_data);
     }
-
+    function client_can_view_file(){
+        
+        if (!in_array($this->login_user->role_id, [6, 9, 10, 11, 12, 13]) &&  $this->login_user->user_type != 'client') {
+            if ($this->Project_files_model->give_client_can_view_file($this->request->getPost("file_id"), $this->request->getPost("project_id"), $this->request->getPost("can_view") ) ) {
+                $result['client_can_view_file'] = $this->request->getPost("can_view") == 'yes' ?  '1' : '0';
+            }
+        }
+        else {
+            $result['permission'] = 'Permission denied!';
+        }
+        echo json_encode($result);
+    }
 }
 
 /* End of file projects.php */

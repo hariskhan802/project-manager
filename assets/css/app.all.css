@@ -5473,3 +5473,8 @@ input[type="search"]::-webkit-search-decoration, input[type="search"]::-webkit-s
   background: rgba(128, 128, 128, 0.4); }
 .sidebar-scroll::-webkit-scrollbar-thumb:active {
   background: rgba(128, 128, 128, 0.4); }
+
+a.client-can-view-file.active {
+    background: #0ABB87;
+    color:  #FFF;
+}

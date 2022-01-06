@@ -39,6 +39,8 @@ Dashboard
 Setting
 Team Members
 Clients
+Hide from task  Batch update,  Add multiple tasks
+Eye button show except team leader and resource
 
 
 
