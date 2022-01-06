@@ -1,0 +1,48 @@
+Project manager
+client
+production manager
+TL=CMS
+respources
+TL-custpm PHP
+respources
+TL-Design
+respources
+TL- Content
+respources
+TL- SEO
+respources
+TL SMM
+respources
+
+Project manager
+Project bana sakta hai.. collibrator add karega .. jo project dekhsakta hai
+
+
+Super Admin 
+Brand bana sakta hai
+
+
+
+Resource
+Hide
+Dashboard
+Setting
+Team Members
+Clients
+
+
+
+
+Team Leader
+Hide
+Dashboard
+Setting
+Team Members
+Clients
+
+
+
+
+project_management_desk
+project_management_desk
+?5bFmUEN1I68
