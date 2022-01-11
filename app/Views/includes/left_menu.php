@@ -25,7 +25,10 @@
                 unset($sidebar_menu['dashboard']);
             }
             // print_r($sidebar_menu); die;
-
+            if (in_array($login_user->role_id, ['0', '3']) && $login_user->user_type == 'staff') {
+                $signup['signup'] = ['name' => 'signup', 'url' => 'signup', 'class' => 'briefcase'];
+                array_splice($sidebar_menu, 6, 0, $signup);
+            }
             foreach ($sidebar_menu as $main_menu) {
                 if (isset($main_menu["name"])) {
                     $submenu = get_array_value($main_menu, "submenu");

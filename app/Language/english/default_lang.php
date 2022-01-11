@@ -6,6 +6,8 @@
 $lang["language_locale"] = "en"; //locale code
 $lang["language_locale_long"] = "en-US"; //long locale code
 
+$lang["signup"] = "Sign Up";
+
 /* common */
 $lang["add"] = "Add";
 $lang["edit"] = "Edit";

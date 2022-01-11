@@ -13,8 +13,12 @@ class Signup extends App_Controller {
     }
 
     function index() {
-        //by default only client can signup directly
-        //if client login/signup is disabled then show 404 page
+        $login_user_id = $this->Users_model->login_user_id();
+        $role_id = $this->Users_model->get_users_by_id($login_user_id) ? $this->Users_model->get_users_by_id($login_user_id)[0]['role_id'] : '';
+        if (!in_array($role_id, ['0', '3'])) {
+            app_redirect('forbidden');
+        }
+
         if (get_setting("disable_client_signup")) {
             show_404();
         }
@@ -81,6 +85,11 @@ class Signup extends App_Controller {
     }
 
     function create_account() {
+        $login_user_id = $this->Users_model->login_user_id();
+        $role_id = $this->Users_model->get_users_by_id($login_user_id) ? $this->Users_model->get_users_by_id($login_user_id)[0]['role_id'] : '';
+        if (!in_array($role_id, ['0', '3'])) {
+            app_redirect('forbidden');
+        }
 
         $signup_key = $this->request->getPost("signup_key");
         $verify_email_key = $this->request->getPost("verify_email_key");
@@ -118,7 +127,8 @@ class Signup extends App_Controller {
             "first_name" => $first_name,
             "last_name" => $last_name,
             "job_title" => $this->request->getPost("job_title") ? $this->request->getPost("job_title") : "Untitled",
-            "created_at" => get_current_utc_time()
+            "created_at" => get_current_utc_time(),
+            
         );
 
         $user_data = clean_data($user_data);
@@ -234,7 +244,8 @@ class Signup extends App_Controller {
 
             $client_data = array(
                 "company_name" => $company_name,
-                "created_by" => 1 //add default admin
+                // "created_by" => 1, //add default admin
+                "created_by" => $login_user_id,
             );
 
             $client_data = clean_data($client_data);
