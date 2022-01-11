@@ -68,3 +68,18 @@ dh6~WQte}z3i
 
 
 /leaves/update_status
+rise_csrf_token: ba91190f10e4e0e735d060cea04292cd
+id: 10
+status: rejected
+
+
+
+/leaves/application_details
+rise_csrf_token: e812cfe548f28ae8abcb09d9816796ea
+ajaxModal: 1
+id: 7
+
+Sick Leave
+Maternity Leave
+Paternity Leave
+Miscellaneous Leave

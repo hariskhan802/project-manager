@@ -392,9 +392,10 @@ class Leaves extends Security_Controller {
         }
 
         //user can update only the applications where status = pending
-        if ($applicatoin_info->status != "pending" || !($status === "approved" || $status === "rejected" || $status === "canceled")) {
+        /*if ($applicatoin_info->status != "pending" || !($status === "approved" || $status === "rejected" || $status === "canceled")) {
             app_redirect("forbidden");
-        }
+        }*/
+            // die('t');
 
         $save_id = $this->Leave_applications_model->ci_save($leave_data, $applicaiton_id);
         if ($save_id) {
