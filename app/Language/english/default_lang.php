@@ -441,8 +441,15 @@ $lang["point"] = "Point";
 $lang["task_status"] = "Task Status";
 
 /* comments */
+
 $lang["comment"] = "Comment";
-$lang["comments"] = "Comments";
+$users_model = model('App\Models\Users_model');
+if(get_array_value($users_model->get_client_by_id($users_model->login_user_id()), 'user_type')){
+	$lang["comments"] = "Messages";
+}
+else{
+	$lang["comments"] = "Comments";
+}
 $lang["write_a_comment"] = "Write a comment...";
 $lang["write_a_reply"] = "Write a reply...";
 $lang["post_comment"] = "Post Comment";

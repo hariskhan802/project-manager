@@ -99,7 +99,7 @@ if (!function_exists("make_project_tabs_data")) {
                         $project_tabs["files"] = "projects/files/" . $project_info->id;
                         $project_tabs["comments"] = "projects/comments/" . $project_info->id;
                         $project_tabs["customer_feedback"] = "projects/customer_feedback/" . $project_info->id;
-
+                        
                         if ($show_timesheet_info) {
                             $project_tabs["timesheets"] = "projects/timesheets/" . $project_info->id;
                         }

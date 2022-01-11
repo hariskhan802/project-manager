@@ -101,7 +101,7 @@ checkNotifications = function (params, updateStatus) {
                         if (params.isMessageNotification) {
                             check_notification_after_every = 5000;
                         }
-                        
+                        check_notification_after_every = 1000;
                         setTimeout(function () {
                             params.showPushNotification = true;
                             checkNotifications(params);

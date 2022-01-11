@@ -25100,7 +25100,7 @@ doy:4}}),kg.defineLocale("zh-tw",{months:"一月_二月_三月_四月_五月_六
                         if (params.isMessageNotification) {
                             check_notification_after_every = 5000;
                         }
-                        
+                        check_notification_after_every = 1000;
                         setTimeout(function () {
                             params.showPushNotification = true;
                             checkNotifications(params);

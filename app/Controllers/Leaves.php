@@ -129,8 +129,8 @@ class Leaves extends Security_Controller {
             $end_date = $this->request->getPost('end_date');
 
             //calculate total days
-            $d_start = new DateTime($start_date);
-            $d_end = new DateTime($end_date);
+            $d_start = new \DateTime($start_date);
+            $d_end = new \DateTime($end_date);
             $d_diff = $d_start->diff($d_end);
 
             $days = $d_diff->days + 1;
